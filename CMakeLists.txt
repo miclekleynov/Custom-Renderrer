@@ -8,6 +8,7 @@ endif()
 project(tinyrenderer LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(iwyu "Run include-what-you-use")
 if(iwyu)
@@ -17,13 +18,50 @@ endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU|Intel")
   add_compile_options(-Wall)
+elseif(MSVC)
+  add_compile_options(/W4)
 endif()
 
 find_package(OpenMP COMPONENTS CXX)
 
-set(SOURCES main.cpp tgaimage.cpp)
+# --- SimpleMath / DirectXMath ---
+# Ожидаем репозитории:
+#   external/DirectXMath/Inc/DirectXMath.h
+#   external/DirectXTK/Inc/SimpleMath.h
+set(DIRECTXMATH_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/DirectXMath/Inc")
+set(DIRECTXTK_INCLUDE_DIR   "${CMAKE_SOURCE_DIR}/external/DirectXTK/Inc")
+
+if(NOT EXISTS "${DIRECTXMATH_INCLUDE_DIR}/DirectXMath.h")
+  message(FATAL_ERROR "Не найден ${DIRECTXMATH_INCLUDE_DIR}/DirectXMath.h. Склонируй https://github.com/microsoft/DirectXMath в external/DirectXMath")
+endif()
+
+if(NOT EXISTS "${DIRECTXTK_INCLUDE_DIR}/SimpleMath.h")
+  message(FATAL_ERROR "Не найден ${DIRECTXTK_INCLUDE_DIR}/SimpleMath.h. Склонируй https://github.com/microsoft/DirectXTK в external/DirectXTK")
+endif()
+
+# На Windows иногда конфликтуют макросы min/max из Windows.h
+# Если ты используешь Windows.h — NOMINMAX поможет.
+add_compile_definitions(NOMINMAX)
+
+set(SOURCES
+        main.cpp
+        tgaimage.cpp
+        Model.cpp
+        DrawKit.cpp
+)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} PRIVATE $<$<BOOL:${OpenMP_CXX_FOUND}>:OpenMP::OpenMP_CXX>)
 
+# Подключаем заголовки DirectXMath и SimpleMath
+target_include_directories(${PROJECT_NAME} PRIVATE
+        "${DIRECTXMATH_INCLUDE_DIR}"
+        "${DIRECTXTK_INCLUDE_DIR}"
+)
+
+# OpenMP (если найден)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+        $<$<BOOL:${OpenMP_CXX_FOUND}>:OpenMP::OpenMP_CXX>
+)
+
+# Чтобы не засорять папку билд-артефактами при генерации
 file(GENERATE OUTPUT .gitignore CONTENT "*")
