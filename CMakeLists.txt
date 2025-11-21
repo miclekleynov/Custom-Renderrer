@@ -47,7 +47,8 @@ set(SOURCES
         main.cpp
         tgaimage.cpp
         Model.cpp
-        DrawKit.cpp
+        Renderer.cpp
+        Camera.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

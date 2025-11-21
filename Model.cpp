@@ -78,24 +78,4 @@ void Model::debugInfo() const {
     cout << "Vertices: " << vertices_.size() << endl;
     cout << "Faces:    " << faces_.size() << endl;
     cout << endl;
-
-    // Выводим вершины
-    cout << "-- Vertices --" << endl;
-    for (std::size_t i = 0; i < vertices_.size(); ++i) {
-        const auto& v = vertices_[i];
-        cout << std::setw(4) << i << ": "
-             << std::fixed << std::setprecision(3)
-             << "(" << v.x << ", " << v.y << ", " << v.z << ")"
-             << endl;
-    }
-
-    cout << endl << "-- Faces (vertex indices) --" << endl;
-    for (std::size_t i = 0; i < faces_.size(); ++i) {
-        const auto& f = faces_[i];
-        cout << std::setw(4) << i << ": "
-             << "[" << f[0] << ", " << f[1] << ", " << f[2] << "]"
-             << endl;
-    }
-
-    cout << "==========================" << endl;
 }
