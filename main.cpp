@@ -29,14 +29,12 @@ int main() {
     Renderer renderer(framebuffer, zbuffer);
 
     Model model;
-    // african_head/african_head.obj
-    // !model.loadOBJ("obj/diablo3_pose/diablo3_pose.obj")
     if (!model.loadOBJ("obj/diablo3_pose/diablo3_pose.obj")) {
         std::cerr << "Error with loading model: diablo3_pose.obj" << std::endl;
     } else {
         std::cout << "✅ Модель успешно загружена" << std::endl;
     }
-    renderer.drawRasterizationLegacy(model, cam, false);
+    renderer.drawRasterization(model, cam);
 
     renderer.GetFramebuffer().write_tga_file("framebuffer.tga");
     renderer.GetZbuffer().write_tga_file("zbuffer.tga");
