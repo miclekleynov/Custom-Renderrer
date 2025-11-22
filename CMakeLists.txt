@@ -49,6 +49,11 @@ set(SOURCES
         Model.cpp
         Renderer.cpp
         Camera.cpp
+        MathTypes.h
+        ShaderTypes.h
+        IShader.h
+        FlatRandomColorShader.cpp
+        FlatRandomColorShader.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

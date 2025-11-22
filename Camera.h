@@ -6,9 +6,8 @@
 #define CAMERA_H
 
 #include <SimpleMath.h>
+#include "MathTypes.h"
 
-using vec3 = DirectX::SimpleMath::Vector3;
-using mat4 = DirectX::SimpleMath::Matrix;
 
 class Camera {
 private:
@@ -17,18 +16,14 @@ private:
     mat4 perspective_{};
 
 public:
-    using vec3 = DirectX::SimpleMath::Vector3;
-    using mat4 = DirectX::SimpleMath::Matrix;
-
     void setModelView(const vec3& eye, const vec3& center, const vec3& up);
     void setPerspective(float f);
     void setViewport(int x, int y, int w, int h);
 
-    [[nodiscard]] const mat4& GetModelView()        const { return modelView_; }
-    [[nodiscard]] const mat4& GetViewport()  const { return viewport_; }
-    [[nodiscard]] const mat4& GetPerspective()    const { return perspective_; }
-
-    [[nodiscard]] mat4 makeMVP() const {
+    [[nodiscard]] const mat4& getModelView()        const { return modelView_; }
+    [[nodiscard]] const mat4& getViewport()  const { return viewport_; }
+    [[nodiscard]] const mat4& getPerspective()    const { return perspective_; }
+    [[nodiscard]] mat4 getViewProjection() const {
         return perspective_ * modelView_;
     }
 

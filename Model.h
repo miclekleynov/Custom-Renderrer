@@ -10,30 +10,26 @@
 #include <string_view>
 #include <vector>
 #include <SimpleMath.h>
+#include "MathTypes.h"
+#include "ShaderTypes.h"
 
 
 class Model {
 public:
-    using Vec3  = DirectX::SimpleMath::Vector3;
-    using Face  = std::array<int, 3>;
-
-    bool loadOBJ(const std::string_view& filepath);
-
     Model() = default;
     explicit Model(const std::string_view& objPath) { loadOBJ(objPath); }
 
+    bool loadOBJ(const std::string_view& filepath);
     void debugInfo() const;
 
-    [[nodiscard]] const std::vector<Vec3>&  getVertices() const { return vertices_; }
-    [[nodiscard]] const std::vector<Face>&  getFaces()    const { return faces_;    }
+    [[nodiscard]] const std::vector<Vertex>&  getVertices() const { return vertices_; }
+    [[nodiscard]] const std::vector<face>&  getFaces()    const { return faces_;    }
 
 private:
-    std::vector<Vec3> vertices_;
-    std::vector<Face> faces_;
-
-    // Разбирает токен индекса из "f"-строки (форматы: "i", "i/j", "i//k", "i/j/k").
-    // Нам нужен только индекс вершины i. Возвращает 0-based индекс.
-    static std::optional<int> parseVertexIndexToken(std::string_view token);
+    std::vector<Vertex> vertices_;
+    std::vector<face> faces_;
+    std::vector<vec3> normals_;
+    std::vector<vec2> uvs_;
 };
 
 
