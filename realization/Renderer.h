@@ -5,7 +5,7 @@
 #ifndef DRAWKIT_H
 #define DRAWKIT_H
 
-#include "tgaimage.h"
+#include "../tga/tgaimage.h"
 #include <SimpleMath.h>
 #include "Camera.h"
 #include <vector>

@@ -45,15 +45,15 @@ add_compile_definitions(NOMINMAX)
 
 set(SOURCES
         main.cpp
-        tgaimage.cpp
-        Model.cpp
-        Renderer.cpp
-        Camera.cpp
-        MathTypes.h
-        ShaderTypes.h
-        IShader.h
-        FlatRandomColorShader.cpp
-        FlatRandomColorShader.h
+        tga/tgaimage.cpp
+        realization/Model.cpp
+        realization/Renderer.cpp
+        realization/Camera.cpp
+        realization/MathTypes.h
+        realization/ShaderTypes.h
+        realization/IShader.h
+        shaders/FlatRandomColorShader.cpp
+        shaders/FlatRandomColorShader.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

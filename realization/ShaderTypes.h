@@ -6,7 +6,7 @@
 #define SHADERTYPES_H
 
 #include "MathTypes.h"
-#include "tgaimage.h"
+#include "../tga/tgaimage.h"
 
 struct Vertex {
     vec3 position;

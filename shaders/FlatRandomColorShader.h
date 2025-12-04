@@ -7,9 +7,9 @@
 
 
 
-#include "IShader.h"
-#include "Camera.h"
-#include "MathTypes.h"
+#include "../realization/IShader.h"
+#include "../realization/Camera.h"
+#include "../realization/MathTypes.h"
 
 // Шейдер, который даёт каждому треугольнику свой случайный цвет
 class FlatRandomColorShader final : public IShader {
