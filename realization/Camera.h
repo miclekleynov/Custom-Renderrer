@@ -14,6 +14,7 @@ private:
     mat4 modelView_{};
     mat4 viewport_{};
     mat4 perspective_{};
+    vec3 eye_{};
 
 public:
     void setModelView(const vec3& eye, const vec3& center, const vec3& up);
@@ -26,6 +27,7 @@ public:
     [[nodiscard]] mat4 getViewProjection() const {
         return perspective_ * modelView_;
     }
+    [[nodiscard]] const vec3& getEye() const { return eye_; }
 
 
 

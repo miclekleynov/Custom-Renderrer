@@ -210,6 +210,19 @@ bool Model::loadOBJ(const std::string_view& filepath) {
     return ok;
 }
 
+bool Model::loadDiffuse(const std::string_view& filepath) {
+    if (!diffuse_.read_tga_file(std::string{filepath}.c_str())) {
+        std::cerr << "Failed to load diffuse texture: " << filepath << '\n';
+        return false;
+    }
+
+    // Чтобы uv.y шли привычно (0 внизу / 1 вверху или наоборот, в зависимости от модели),
+    // как в TinyRenderer переворачиваем по вертикали.
+    diffuse_.flip_vertically();
+
+    return true;
+}
+
 void Model::debugInfo() const {
     using std::cout;
     using std::endl;

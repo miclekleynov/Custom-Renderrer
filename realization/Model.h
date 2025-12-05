@@ -20,6 +20,10 @@ public:
     explicit Model(const std::string_view& objPath) { loadOBJ(objPath); }
 
     bool loadOBJ(const std::string_view& filepath);
+
+    bool loadDiffuse(const std::string_view& filepath);
+    [[nodiscard]] const TGAImage& getDiffuse() const { return diffuse_; }
+
     void debugInfo() const;
 
     [[nodiscard]] const std::vector<Vertex>&  getVertices() const { return vertices_; }
@@ -30,6 +34,7 @@ private:
     std::vector<face> faces_;
     std::vector<vec3> normals_;
     std::vector<vec2> uvs_;
+    TGAImage diffuse_;
 };
 
 

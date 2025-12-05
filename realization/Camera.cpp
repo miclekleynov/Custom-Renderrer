@@ -8,6 +8,7 @@ void Camera::setModelView(const vec3& eye,
                           const vec3& center,
                           const vec3& up)
 {
+    eye_ = eye;
     vec3 z = eye - center; // forward (от центра к камере)
     z.Normalize();
 
