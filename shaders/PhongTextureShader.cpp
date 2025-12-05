@@ -54,13 +54,21 @@ TGAColor PhongTextureShader::sampleDiffuse(const vec2& uv) const {
         return white;
     }
 
-    float u = std::clamp(uv.x, 0.0f, 1.0f);
-    float v = std::clamp(uv.y, 0.0f, 1.0f);
+    // --- 1. wrap uv в диапазон [0;1) ---
+    auto wrap01 = [](float t) {
+        t = std::fmod(t, 1.0f);
+        if (t < 0.0f) t += 1.0f;
+        return t;
+    };
+
+    float u = wrap01(uv.x);
+    float v = wrap01(uv.y);
 
     const int texWidth  = diffuseMap_.width();
     const int texHeight = diffuseMap_.height();
 
-    // Мы перевернём текстуру в Model, так что здесь можно брать v как есть
+    // учитываем flip_vertically() в Model::loadDiffuse
+    // поэтому здесь НЕ переворачиваем ещё раз по Y
     const int x = static_cast<int>(u * static_cast<float>(texWidth  - 1));
     const int y = static_cast<int>(v * static_cast<float>(texHeight - 1));
 

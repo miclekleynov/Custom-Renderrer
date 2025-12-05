@@ -9,13 +9,13 @@ void Camera::setModelView(const vec3& eye,
                           const vec3& up)
 {
     eye_ = eye;
-    vec3 z = eye - center; // forward (от центра к камере)
+    vec3 z = eye - center;
     z.Normalize();
 
-    vec3 x = up.Cross(z);  // right
+    vec3 x = up.Cross(z);
     x.Normalize();
 
-    vec3 y = z.Cross(x);   // up (ортогонализованный)
+    vec3 y = z.Cross(x);
     y.Normalize();
 
     const float tx = -eye.Dot(x);

@@ -182,10 +182,6 @@ void Renderer::drawModel(const Model &model) {
     const auto& vertices = model.getVertices();
     const auto& faces    = model.getFaces();
 
-    // Каждый кадр нужно очищать depth-buffer
-    std::fill(depthBuffer_.begin(), depthBuffer_.end(),
-              -std::numeric_limits<float>::max());
-
     for (const auto& face : faces) {
         VertexOut vOut[3];
 
