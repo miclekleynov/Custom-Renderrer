@@ -38,9 +38,8 @@ public:
     void setCamera(const Camera& cam) { camera_ = &cam; }
     void setShader(IShader& shader)   { shader_ = &shader; }
 
-    void drawLine(int ax, int ay, int bx, int by, const TGAColor& color);
-    void drawRasterization(const Model& model, const Camera& camera);
-    void rasterize(const vec4 clip[3], const TGAColor& color);
+    void clearDepth();
+
     void drawModel(const Model& model);
 
     [[nodiscard]] TGAImage& GetFramebuffer() {return framebuffer_;};

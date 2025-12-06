@@ -56,6 +56,8 @@ set(SOURCES
         shaders/FlatRandomColorShader.h
         shaders/PhongTextureShader.cpp
         shaders/PhongTextureShader.h
+        shaders/RedTintHeadShader.cpp
+        shaders/RedTintHeadShader.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
